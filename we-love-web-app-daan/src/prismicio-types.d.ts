@@ -4,7 +4,7 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomeDocumentDataSlicesSlice = HomeSlice;
+type HomeDocumentDataSlicesSlice = PostsSlice;
 
 /**
  * Content for home documents
@@ -136,31 +136,46 @@ export type PostDocument<Lang extends string = string> = prismic.PrismicDocument
 export type AllDocumentTypes = HomeDocument | PostDocument;
 
 /**
- * Default variation for Home Slice
+ * Primary content in *Posts → Items*
+ */
+export interface PostsSliceDefaultItem {
+	/**
+	 * link field in *Posts → Items*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: posts.items[].link
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	link: prismic.ContentRelationshipField;
+}
+
+/**
+ * Default variation for Posts Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type HomeSliceDefault = prismic.SharedSliceVariation<
+export type PostsSliceDefault = prismic.SharedSliceVariation<
 	'default',
 	Record<string, never>,
-	never
+	Simplify<PostsSliceDefaultItem>
 >;
 
 /**
- * Slice variation for *Home*
+ * Slice variation for *Posts*
  */
-type HomeSliceVariation = HomeSliceDefault;
+type PostsSliceVariation = PostsSliceDefault;
 
 /**
- * Home Shared Slice
+ * Posts Shared Slice
  *
- * - **API ID**: `home`
- * - **Description**: Home
+ * - **API ID**: `posts`
+ * - **Description**: Posts
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type HomeSlice = prismic.SharedSlice<'home', HomeSliceVariation>;
+export type PostsSlice = prismic.SharedSlice<'posts', PostsSliceVariation>;
 
 declare module '@prismicio/client' {
 	interface CreateClient {
@@ -178,9 +193,10 @@ declare module '@prismicio/client' {
 			PostDocument,
 			PostDocumentData,
 			AllDocumentTypes,
-			HomeSlice,
-			HomeSliceVariation,
-			HomeSliceDefault
+			PostsSlice,
+			PostsSliceDefaultItem,
+			PostsSliceVariation,
+			PostsSliceDefault
 		};
 	}
 }

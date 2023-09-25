@@ -16,14 +16,14 @@ export const repositoryName = config.repositoryName;
 // TODO: Update the routes array to match your project's route structure.
 const routes = [
 	{
-		type: 'homepage',
-		path: '/'
+	  type: "home",
+	  path: "/",
 	},
 	{
-		type: 'page',
-		path: '/:uid'
-	}
-];
+	  type: "home",
+	  path: "/:uid",
+	},
+  ];
 
 /**
  * Creates a Prismic client for the project's repository. The client is used to
