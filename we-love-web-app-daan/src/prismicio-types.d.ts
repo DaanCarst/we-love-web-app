@@ -85,6 +85,17 @@ interface PostDocumentData {
 	title: prismic.KeyTextField;
 
 	/**
+	 * content field in *post*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: post.content
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	content: prismic.KeyTextField;
+
+	/**
 	 * beschrijving field in *post*
 	 *
 	 * - **Field Type**: Rich Text
